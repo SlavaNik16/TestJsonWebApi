@@ -1,22 +1,14 @@
 package com.example.ft.Activity
 
-import android.R
-import java.text.SimpleDateFormat
-import android.icu.util.LocaleData
 import android.os.Build
 import android.os.Bundle
-import android.text.format.DateFormat
-import android.util.Log
-import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import com.example.ft.API.TripsApi
 import com.example.ft.API.UsersApi
 import com.example.ft.Models.User
-import com.example.ft.Models.Users
+import com.example.ft.Models.GetUserID
 import com.example.ft.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,10 +20,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.time.Duration.Companion.days
 
 
 class MainActivity : AppCompatActivity() {
@@ -81,11 +70,8 @@ class MainActivity : AppCompatActivity() {
                     )
                 ).enqueue(object : retrofit2.Callback<ResponseBody>{
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-
-                       var list = Gson().fromJson(response.body()?.string(), Users::class.java)
-                        Log.d("efe","efs");
-
-
+                       var list = Gson().fromJson("""${response.body()!!.string()}""", GetUserID::class.java)
+                       ID =  list.id_user
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
