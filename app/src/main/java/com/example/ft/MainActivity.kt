@@ -1,4 +1,4 @@
-package com.example.ft.Activity
+package com.example.ft
 
 import android.os.Build
 import android.os.Bundle
@@ -6,10 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ft.API.TripsApi
 import com.example.ft.API.UsersApi
-import com.example.ft.Models.User
-import com.example.ft.Models.GetUserID
 import com.example.ft.databinding.ActivityMainBinding
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +16,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.time.LocalDate
 import java.util.*
 
 
