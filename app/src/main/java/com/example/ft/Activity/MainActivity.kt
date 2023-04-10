@@ -25,6 +25,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var ID:UUID
     @RequiresApi(Build.VERSION_CODES.O)
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -55,19 +55,23 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonEdit.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
-            usersApi.DeleteUser(
-            "512ea2dd-e636-4557-ade4-0dc41f615500",
-            ).enqueue(object: retrofit2.Callback<ResponseBody> {
-                override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
-                ) {
-                }
+                usersApi.DeleteUser(
+                    "512ea2dd-e636-4557-ade4-0dc41f615500",
+                ).enqueue(object : retrofit2.Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                    }
 
-                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                }
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    }
 
-            })
+                })
+            }
+            runOnUiThread{
+
+            }
 /* var date = LocalDate.parse("2003-02-03")
 var user = User(
    "ура",
@@ -114,7 +118,7 @@ var text = usersApi.NewUser(
 ).enqueue(object : retrofit2.Callback<ResponseBody>{
    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
       var list = Gson().fromJson("""${response.body()!!.string()}""", GetUserID::class.java)
-      ID =  list.id_user
+      return list.id_user
    }
 
    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -133,7 +137,8 @@ var text = usersApi.NewUser(
 //                    binding.text.text = text.toString()
 //                }
 
-}
+//}
+
 }
 
 }
